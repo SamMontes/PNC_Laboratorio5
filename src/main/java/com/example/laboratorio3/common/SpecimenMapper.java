@@ -2,7 +2,7 @@ package com.example.laboratorio3.common;
 
 import com.example.laboratorio3.domain.dto.request.CreateSpecimenRequest;
 import com.example.laboratorio3.domain.dto.request.UpdateSpecimenRequest;
-import com.example.laboratorio3.domain.dto.responses.SpecimenResponse;
+import com.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 import com.example.laboratorio3.domain.entities.Specimen;
 import org.springframework.stereotype.Component;
 
