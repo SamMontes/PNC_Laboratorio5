@@ -1,0 +1,231 @@
+{
+  "info": {
+    "name": "Laboratorio 3",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Specimen",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bokoblin\",\n  \"category\": \"Monster\",\n  \"region\": \"Hyrule Field\",\n  \"dangerLevel\": 1,\n  \"isFriendly\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get Specimen By ID",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen/getBy/{id}",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen",
+            "getBy",
+            "{id}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Update Specimen",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen/update/{id}",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen",
+            "update",
+            "{id}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bokoblin\",\n  \"category\": \"Monster\",\n  \"region\": \"Hyrule Field\",\n  \"dangerLevel\": 2,\n  \"isFriendly\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get All Specimens",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen/getAll",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen",
+            "getAll"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Delete Specimen",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen/delete/{id}",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen",
+            "delete",
+            "{id}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Get a Non-Existent ID",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "http:localhost:8080/api/specimen/getBy/89e4fec5-e3c0-4318-94c9-1234589b1b1b",
+          "protocol": "",
+          "host": [
+            "http:localhost:8080"
+          ],
+          "path": [
+            "api",
+            "specimen",
+            "getBy",
+            "89e4fec5-e3c0-4318-94c9-1234589b1b1b"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": []
+}

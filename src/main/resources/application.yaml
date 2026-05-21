@@ -3,9 +3,9 @@ spring:
     name: Laboratorio3
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/Specimens
-    username: postgres
-    password: LunaMoka2001
+    url: {DATABASE_URL}
+    username: {DATABASE_USERNAME}
+    password: {DATABASE_PASSWORD}
 
   jpa:
     show-sql: false
