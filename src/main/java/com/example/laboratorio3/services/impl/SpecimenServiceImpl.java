@@ -3,6 +3,7 @@ package com.example.laboratorio3.services.impl;
 import com.example.laboratorio3.common.SpecimenMapper;
 import com.example.laboratorio3.domain.dto.request.CreateSpecimenRequest;
 import com.example.laboratorio3.domain.dto.request.UpdateSpecimenRequest;
+import com.example.laboratorio3.domain.dto.response.PageableResponse;
 import com.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 import com.example.laboratorio3.domain.entities.Specimen;
 import com.example.laboratorio3.exceptions.ResourceNotFoundException;
@@ -10,6 +11,10 @@ import com.example.laboratorio3.repositories.SpecimenRepository;
 import com.example.laboratorio3.services.SpecimenService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,14 +36,24 @@ public class SpecimenServiceImpl implements SpecimenService {
     }
 
     @Override
-    public List<SpecimenResponse> getAllSpecimens() {
-        List<Specimen> specimens = specimenRepository.findAll();
-        if (specimens.isEmpty())
-            throw new ResourceNotFoundException("No specimens are registered in Hyrule");
+    public PageableResponse<SpecimenResponse> getAllSpecimens(int page, int size, String sortBy, String sortOrder) {
+        Sort sort = sortOrder.equalsIgnoreCase("desc") ?
+                Sort.by(sortBy).descending() :
+                Sort.by(sortBy).ascending();
 
-        return specimens.stream()
-                .map(specimenMapper::toDto)
-                .collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<SpecimenResponse> specimenPage = specimenMapper.toDtoList(specimenRepository.findAll(pageable));
+        if (specimenPage.getTotalElements() == 0)
+            throw new ResourceNotFoundException("No specimens are registered");
+
+        return PageableResponse.<SpecimenResponse>builder()
+                .content(specimenPage.getContent())
+                .page(specimenPage.getNumber())
+                .size(specimenPage.getSize())
+                .totalElements(specimenPage.getTotalElements())
+                .totalPages(specimenPage.getTotalPages())
+                .last(specimenPage.isLast())
+                .build();
     }
 
     @Override

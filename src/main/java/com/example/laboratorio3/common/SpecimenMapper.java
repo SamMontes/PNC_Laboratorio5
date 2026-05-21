@@ -4,6 +4,7 @@ import com.example.laboratorio3.domain.dto.request.CreateSpecimenRequest;
 import com.example.laboratorio3.domain.dto.request.UpdateSpecimenRequest;
 import com.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 import com.example.laboratorio3.domain.entities.Specimen;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -37,5 +38,10 @@ public class SpecimenMapper {
                 .dangerLevel(specimen.getDangerLevel())
                 .isFriendly(specimen.getIsFriendly())
                 .build();
+    }
+
+    public Page<SpecimenResponse> toDtoList(Page<Specimen> specimens) {
+        return specimens
+                .map(this::toDto);
     }
 }

@@ -28,6 +28,20 @@ public class SpecimenController {
         );
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<GeneralResponse> getAllSpecimens(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "2") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortOrder
+    ) {
+        return buildResponse(
+                "Products found",
+                HttpStatus.OK,
+                specimenService.getAllSpecimens(page, size, sortBy, sortOrder)
+        );
+    }
+
     @GetMapping("getBy/{id}")
     public ResponseEntity<GeneralResponse> getSpecimenById(@PathVariable UUID id){
         return buildResponse(
