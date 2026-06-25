@@ -3,14 +3,14 @@ spring:
     name: Laboratorio3
 
   datasource:
-    url: {DATABASE_URL}
-    username: {DATABASE_USERNAME}
-    password: {DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
   jpa:
-    show-sql: false
+    show-sql: ${SPRING_JPA_SHOW_SQL}
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: ${SPRING_JPA_HIBERNATE_DIALECT}

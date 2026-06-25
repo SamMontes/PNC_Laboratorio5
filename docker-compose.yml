@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: specimen-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - specimen-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - specimen-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: specimen-api
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      SPRING_JPA_SHOW_SQL: ${SPRING_JPA_SHOW_SQL}
+      SPRING_JPA_HIBERNATE_DIALECT: ${SPRING_JPA_HIBERNATE_DIALECT}
+      SPRING_APPLICATION_NAME: ${SPRING_APPLICATION_NAME}
+    ports:
+      - "8080:8080"
+    networks:
+      - specimen-network
+
+networks:
+  specimen-network:
+
+volumes:
+  specimen-db-data:
+    driver: local
