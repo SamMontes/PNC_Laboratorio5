@@ -16,7 +16,6 @@ RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
 COPY --from=build /app/target/*.jar app.jar
-COPY --from=build /app/.env .env
 
 EXPOSE 8080
 
