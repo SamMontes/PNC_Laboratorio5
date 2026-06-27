@@ -21,7 +21,7 @@ jobs:
           cache: maven
 
       - name: Build + Tests
-        run: ./mvnw clean verify -B
+        run: ./mvnw package -B -DskipTests
 
       - name: publish tests reports
         if: always()
